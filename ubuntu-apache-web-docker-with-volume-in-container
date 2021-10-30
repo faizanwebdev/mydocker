@@ -1,0 +1,25 @@
+FROM ubuntu
+RUN apt update -y
+RUN apt upgrade -y
+RUN apt install unzip -y
+RUN apt install wget -y
+RUN apt install systemctl -y
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt install apache2 -y
+WORKDIR /var/www/html
+RUN wget https://www.tooplate.com/zip-templates/2119_gymso_fitness.zip
+RUN unzip 2119_gymso_fitness.zip
+RUN mv 2119_gymso_fitness mywebsite
+RUN systemctl start apache2
+RUN systemctl enable apache2
+VOLUME /var/www/html
+CMD ["apachectl", "-D", "FOREGROUND"]
+
+#run the below command to build image using this docker file
+#docker build -t <newimagename>
+
+#after creation of image, run container with port mapping of host system with container port 80
+#docker run -td --name <containername> -p (hostport):80 <buildimagename>
+
+#for volume mapping of host system and container system
+#docker run -td --name <containername> -p (hostport):80 -v (hostpath for volume):(containerpath for volume) <buildimage>
