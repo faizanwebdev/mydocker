@@ -19,3 +19,6 @@ CMD ["apachectl", "-D", "FOREGROUND"]
 
 #after creation of image, run container with port mapping of host system with container port 80
 #docker run -td --name <containername> -p (hostport):80 <buildimagename>
+
+#for volume mapping of host system and container system
+#docker run -td --name <containername> -p (hostport):80 -v (hostpath for volume):(containerpath for volume) <buildimage>
